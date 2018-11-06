@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS MineSweeper</title>
+    <link rel="stylesheet" href="../../bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Minesweeper.css">
+    <script src="../../angular-1.3.16/angular.min.js"></script>
+</head>
+
+<body ng-app='minesweeper' ng-controller="MinesweeperGameController">
+    <h1><center><b>Minesweeper</b></center></h1>
+    <center>
+        <div ng-hide="isLogin">
+            <input type="text" id="userName" placeholder="Please type your name!" ng-model="userName">
+            <button type="submit" ng-click="login()">Login</button>
+        </div>
+    </center>
+
+    <center>
+        <div ng-show="isLogin" ng-init="initialize()">
+            <h2><center>Player Name	 :	{{playerName}}</center></h2>
+            <div ng-hide="isOver">
+            <h3><center>Let's start to play Minesweeper Game !!! </center></h3>
+            </div>
+            <div ng-show="isOver">
+                <h3><center>{{alive}}</center></h3>
+            </div>
+            <table class="gdtable">
+                <tr ng-repeat="row in grid()">
+                    <td ng-repeat="column in grid()" class="gdtd">
+                        <button ng-class="changeClass(board[row][column])" ng-click="reveal(row, column);">{{changeTable(row, column)}}</button>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <button class="btn btn-warning" ng-click="showAll();">Done</button>
+            <button class="btn btn-info" ng-click="reInitialize();">Refresh</button>
+        </div>
+    </center>
+
+    <script src="../js/MinesweeperModule.js"></script>
+    <script src="../js/MinesweeperGameController.js"></script>
+
+</body>
+
+</html>
